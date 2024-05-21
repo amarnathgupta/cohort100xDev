@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" name="title" id="title" placeholder="title"><br><br>
+        <input type="text" name="description" id="description" placeholder="description"><br><br>
+        <button onclick="addTodo()">Add ToDo</button><hr>
+    </div>
+    <div id="result"></div>
+    <script>
+        let id = 0;
+        function addTodo() {
+            const title = document.querySelector("#title").value;
+            const description = document.querySelector("#description").value;
+            const result = document.querySelector("#result");
+            const outerDiv = document.createElement('div');
+            const head = document.createElement('h3');
+            const para = document.createElement('p');
+            const btn = document.createElement('button')
+            head.setAttribute('id', id);
+            head.innerHTML = title;
+            para.innerHTML = description;
+            btn.innerText = "Mark as Done!"
+            btn.setAttribute('onclick',`markAsDone(${id})`)
+            outerDiv.appendChild(head);
+            outerDiv.appendChild(para);
+            outerDiv.appendChild(btn)
+            result.appendChild(outerDiv);
+            id++;
+        }
+        function markAsDone(id) {
+            let divs = document.querySelectorAll('#result div');
+            console.log(divs);
+            divs.forEach(div => {
+                if(div.getAttribute('id') == id) {
+                    div.children[2].innerHTML = "Done!"
+                }
+        })
+        }
+    </script>
+</body>
+</html>
